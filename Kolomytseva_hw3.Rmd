@@ -123,19 +123,11 @@ confint(model, level=0.90)
 Постройте график плотности вероятности для переменной glucose и отметьте на нем среднее значение. Для той же переменной постройте гистограмму. 
 
 ```{r}
-# среднее значение
-mean_value <- mean(data$glucose)
-# стандартное отклонение
-st_dev <- sd(data$glucose)
-# плотность вероятности
-pdf<- dnorm(data$glucose, mean_value, st_dev)
-
-ggplot(data, aes(x = glucose, y = pdf)) +
-  geom_point() +
+ggplot(data = data) +
+  geom_density(aes(glucose)) +
+  geom_vline(xintercept = mean(data$glucose), colour = 2) +
   labs(title = "Плотность вероятности переменной glucose",
-      x = "глюкоза",
-      y = "плотность вероятности") +
-  geom_vline(xintercept = mean_value, colour = 2)
+       x = "глюкоза", y = "плотность вероятности")
 
 ggplot(data, aes(x = glucose)) +
   geom_histogram(colour = 1, fill = "white") +
